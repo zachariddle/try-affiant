@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Affiant — Swear to the Truth</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f5f2eb;
+      --bark: #2c2016;
+      --moss: #3d5230;
+      --sage: #6b8c57;
+      --stone: #8a8070;
+      --gold: #a87d30;
+      --mist: #c5d4b8;
+      --text: #1e1a12;
+      --text-light: #6b6455;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      background: transparent;
+      transition: background 0.4s, border-color 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(245,242,235,0.93);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(44,32,22,0.07);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.5rem;
+      letter-spacing: 0.22em;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.4s;
+    }
+    nav.scrolled .nav-logo { color: var(--bark); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav.scrolled .nav-links a { color: var(--text-light); }
+    .nav-links a:hover { color: #fff; }
+    nav.scrolled .nav-links a:hover { color: var(--bark); }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Real photo background */
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      transform: scale(1.04);
+      animation: subtleZoom 18s ease-in-out infinite alternate;
+    }
+    @keyframes subtleZoom {
+      from { transform: scale(1.04); }
+      to   { transform: scale(1.10); }
+    }
+
+    /* Gradient overlay — light at top (mist), darkens toward bottom for text legibility */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(15, 30, 12, 0.35) 0%,
+          rgba(15, 30, 12, 0.15) 35%,
+          rgba(15, 30, 12, 0.40) 70%,
+          rgba(10, 20, 8,  0.72) 100%
+        );
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 2rem;
+      max-width: 720px;
+    }
+
+    .wordmark {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(4rem, 11vw, 8rem);
+      letter-spacing: 0.22em;
+      color: #fff;
+      line-height: 1;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 1s ease forwards 0.2s;
+      text-shadow: 0 2px 40px rgba(0,0,0,0.3);
+    }
+
+    .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      color: rgba(255,255,255,0.78);
+      letter-spacing: 0.1em;
+      margin-top: 0.75rem;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.45s;
+    }
+
+    .hero-rule {
+      width: 48px;
+      height: 1px;
+      background: rgba(255,255,255,0.4);
+      margin: 2rem auto;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.65s;
+    }
+
+    .hero-sub {
+      font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.9;
+      max-width: 460px;
+      margin: 0 auto;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.85s;
+    }
+
+    .hero-cta {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 1.05s;
+    }
+
+    .btn-primary {
+      padding: 0.8rem 2.2rem;
+      background: #fff;
+      color: var(--bark);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--mist); transform: translateY(-2px); }
+
+    .btn-ghost {
+      padding: 0.8rem 2.2rem;
+      background: transparent;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.5);
+      display: inline-block;
+      transition: background 0.3s, border-color 0.3s, transform 0.2s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: #fff; transform: translateY(-2px); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 1.4s;
+    }
+    .scroll-hint span {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.42);
+    }
+    .scroll-line {
+      width: 1px;
+      height: 30px;
+      background: rgba(255,255,255,0.3);
+      animation: scrollPulse 2.2s ease-in-out infinite 1.6s;
+    }
+    @keyframes scrollPulse {
+      0%,100% { opacity:0.3; transform:scaleY(1); }
+      50% { opacity:0.8; transform:scaleY(1.15); }
+    }
+
+    /* Photo credit */
+    .photo-credit {
+      position: absolute;
+      bottom: 1rem;
+      right: 1.2rem;
+      z-index: 3;
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.3);
+    }
+    .photo-credit a { color: inherit; text-decoration: none; }
+    .photo-credit a:hover { color: rgba(255,255,255,0.6); }
+
+    /* FEATURES */
+    .features { padding: 7rem 2rem; background: var(--cream); }
+    .features-inner { max-width: 1000px; margin: 0 auto; }
+
+    .section-eyebrow {
+      font-size: 0.67rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--sage);
+      text-align: center;
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(1.9rem, 3.5vw, 2.7rem);
+      color: var(--bark);
+      text-align: center;
+      line-height: 1.3;
+      margin-bottom: 4rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid rgba(44,32,22,0.1);
+    }
+    .feat {
+      padding: 2.4rem 1.8rem;
+      border-right: 1px solid rgba(44,32,22,0.1);
+      border-bottom: 1px solid rgba(44,32,22,0.1);
+      transition: background 0.3s;
+    }
+    .feat:nth-child(3n) { border-right: none; }
+    .feat:nth-last-child(-n+3) { border-bottom: none; }
+    .feat:hover { background: rgba(107,140,87,0.05); }
+    .feat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.88rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.9rem;
+    }
+    .feat-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--bark);
+      margin-bottom: 0.55rem;
+    }
+    .feat-desc {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--text-light);
+      line-height: 1.85;
+    }
+
+    /* DOWNLOAD */
+    .download {
+      padding: 7rem 2rem;
+      background: var(--moss);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .download-trees {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 110px;
+      opacity: 0.1;
+    }
+    .download-inner { position: relative; z-index: 2; }
+    .download-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      color: #fff;
+      margin-bottom: 0.7rem;
+    }
+    .download-sub {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--mist);
+      letter-spacing: 0.1em;
+      margin-bottom: 2.5rem;
+    }
+    .btn-download {
+      display: inline-block;
+      padding: 0.9rem 2.8rem;
+      background: #fff;
+      color: var(--moss);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-download:hover { background: var(--mist); transform: translateY(-2px); }
+    .platform-note {
+      margin-top: 1.1rem;
+      font-size: 0.68rem;
+      font-weight: 300;
+      color: rgba(197,212,184,0.55);
+      letter-spacing: 0.1em;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 3rem;
+      background: var(--bark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      color: var(--stone);
+    }
+    .footer-copy {
+      font-size: 0.67rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--stone);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 720px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .feat { border-right: none; }
+      .feat:nth-last-child(-n+3) { border-bottom: 1px solid rgba(44,32,22,0.1); }
+      .feat:last-child { border-bottom: none; }
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a class="nav-logo" href="#">Affiant</a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#download">Download</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <!-- Real forest photo -->
+    <img
+      class="hero-photo"
+      src="forest.jpg"
+      alt="Misty forest background"
+    />
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <h1 class="wordmark">AFFIANT</h1>
+      <p class="tagline">Swear to the truth.</p>
+      <div class="hero-rule"></div>
+      <p class="hero-sub">Parse documents, extract facts, and generate summaries — all with automatic citations. Built for researchers. Useful for everyone.</p>
+      <div class="hero-cta">
+        <a href="#download" class="btn-primary">Download Free</a>
+        <a href="#features" class="btn-ghost">Learn More</a>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+
+    <p class="photo-credit">
+      Photo by <a href="https://unsplash.com/@marinajune" target="_blank">Marita Kavelashvili</a> / Unsplash
+    </p>
+  </section>
+
+  <section class="features" id="features">
+    <div class="features-inner">
+      <p class="section-eyebrow reveal">What Affiant Does</p>
+      <h2 class="section-title reveal">Document intelligence,<br><em>grounded in evidence</em></h2>
+      <div class="features-grid">
+        <div class="feat reveal">
+          <p class="feat-num">01</p>
+          <h3 class="feat-title">Document Parsing</h3>
+          <p class="feat-desc">Upload any document. Affiant reads it deeply and surfaces what matters — facts, figures, and key passages — instantly.</p>
+        </div>
+        <div class="feat reveal">
+          <p class="feat-num">02</p>
+          <h3 class="feat-title">Smart Summaries</h3>
+          <p class="feat-desc">Concise, accurate summaries of dense papers, reports, and articles. Retains nuance. Cuts noise.</p>
+        </div>
+        <div class="feat reveal">
+          <p class="feat-num">03</p>
+          <h3 class="feat-title">Auto Citations</h3>
+          <p class="feat-desc">Every extracted fact arrives with a citation, automatically formatted — so your work is always traceable.</p>
+        </div>
+        <div class="feat reveal">
+          <p class="feat-num">04</p>
+          <h3 class="feat-title">Logic & Reasoning</h3>
+          <p class="feat-desc">Ask Affiant to compare, contrast, or follow an argument across documents. Basic logical inference built in.</p>
+        </div>
+        <div class="feat reveal">
+          <p class="feat-num">05</p>
+          <h3 class="feat-title">Facts & Figures</h3>
+          <p class="feat-desc">Instantly surface statistics, dates, and data points buried in dense text — no manual hunting required.</p>
+        </div>
+        <div class="feat reveal">
+          <p class="feat-num">06</p>
+          <h3 class="feat-title">Carbon Tracker</h3>
+          <p class="feat-desc">A live counter shows the carbon and energy you save each session — research that respects the planet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="download" id="download">
+    <svg class="download-trees" viewBox="0 0 1440 110" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <polygon points="0,110 48,38 96,110" fill="#fff"/>
+      <polygon points="75,110 135,18 195,110" fill="#fff"/>
+      <polygon points="175,110 245,48 315,110" fill="#fff"/>
+      <polygon points="295,110 370,28 445,110" fill="#fff"/>
+      <polygon points="415,110 496,43 577,110" fill="#fff"/>
+      <polygon points="538,110 624,22 710,110" fill="#fff"/>
+      <polygon points="670,110 760,38 850,110" fill="#fff"/>
+      <polygon points="800,110 895,28 990,110" fill="#fff"/>
+      <polygon points="930,110 1030,43 1130,110" fill="#fff"/>
+      <polygon points="1060,110 1165,26 1270,110" fill="#fff"/>
+      <polygon points="1200,110 1308,40 1416,110" fill="#fff"/>
+      <polygon points="1360,110 1440,52 1440,110" fill="#fff"/>
+    </svg>
+    <div class="download-inner">
+      <h2 class="download-title reveal">Ready to begin?</h2>
+      <p class="download-sub reveal">Free to use &nbsp;·&nbsp; macOS Apple Silicon &nbsp;·&nbsp; Version 1.1.0</p>
+      <a href="#" class="btn-download reveal">Download Affiant</a>
+      <p class="platform-note reveal">Requires macOS 12 or later &nbsp;·&nbsp; Apple Silicon (M1 and later)</p>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">Affiant</span>
+    <span class="footer-copy">© 2026 Affiant. All rights reserved.</span>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => io.observe(el));
+  </script>
+
+</body>
+</html>
