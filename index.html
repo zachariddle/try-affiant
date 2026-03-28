@@ -16,8 +16,17 @@
     }
 
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; font-weight: 500; -webkit-font-smoothing: antialiased; }
-
+body { 
+  font-family: 'Inter', sans-serif; 
+  /* Updated Background: Fades from the deep forest green to a muted sage */
+  background: linear-gradient(to bottom, #1a2615 0%, #2c3e24 20%, #3d5238 100%);
+  background-attachment: fixed; /* This keeps the background still while the card scrolls */
+  
+  color: var(--text); 
+  overflow-x: hidden; 
+  font-weight: 500; 
+  -webkit-font-smoothing: antialiased; 
+}
     /* NAV - Transparent and Scrolls Away */
     nav {
       position: absolute; /* Changed from fixed so it scrolls away */
