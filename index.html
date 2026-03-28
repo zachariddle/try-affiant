@@ -75,50 +75,61 @@
 
     .mac-icon { width: 20px; height: 20px; fill: currentColor; transform: translateY(-3px); filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2)); shape-rendering: geometricPrecision; position: relative; z-index: 3; }
 
-/* Earthy Glassy Bottom Button */
+/* Sunlit Moss - Earthy Glass Bottom Button */
 .btn-glass-earth {
   display: inline-flex;
   align-items: center;
   gap: 12px;
   padding: 1rem 2.5rem;
   
-  /* Lighter, Earthier Moss Gradient */
-  background: linear-gradient(180deg, #5a7d4a 0%, #3d5230 100%);
+  /* Option 1: Sunlit Moss Gradient */
+  background: linear-gradient(180deg, #7cb342 0%, #558b2f 100%);
   
   color: #fff;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.05em;
   text-decoration: none;
+  text-transform: none; /* Keeps it natural and clean */
   
   /* Rectangular Shape */
   border-radius: 4px;
   
   /* Glass Styling */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.1);
   
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
-  transition: background 0.5s ease; /* Gentle transition */
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
 }
 
-/* The Glossy Top Shine (Same as others for brand consistency) */
+/* The Glossy Top Shine */
 .btn-glass-earth::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 45%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
   pointer-events: none;
+  z-index: 2;
 }
 
-/* Subtle Hover: Just darkens the base slightly, no movement/scaling */
+/* Subtle Hover: Just darkens the base slightly, no movement */
 .btn-glass-earth:hover {
-  background: linear-gradient(180deg, #4d6b3f 0%, #344729 100%);
+  background: linear-gradient(180deg, #689f38 0%, #436d24 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Subtle "press" feel */
   transform: none; 
+}
+
+/* Ensure the Apple Icon is consistent */
+.btn-glass-earth .mac-icon {
+  fill: #fff;
+  transform: translateY(-1.5px); /* Perfectly nudged up */
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
 }
     
     /* Features */
