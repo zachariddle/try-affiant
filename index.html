@@ -346,30 +346,55 @@
       letter-spacing: 0.1em;
     }
 
+    /* FOOTER */
     footer {
-  padding: 2.5rem 3rem;
-  background: #1a2615; 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  /* This creates a "strong but muted" white line */
-  border-top: 1px solid rgba(255, 255, 255, 0.15); 
-}
+      padding: 3rem 3rem;
+      background: #1a2615; 
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end; /* Aligns items to the bottom line */
+      flex-wrap: wrap;
+      gap: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.15); 
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
     .footer-logo {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.05em;
-  color: var(--mist);
-  opacity: 0.8;
-}
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      color: #fff;
+      text-transform: none;
+    }
+
+    .footer-email {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem; 
+      font-weight: 400;   
+      color: var(--mist) !important;
+      text-decoration: none !important;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+      letter-spacing: 0.01em; 
+    }
+
+    .footer-email:hover {
+      opacity: 1;
+      color: #fff !important;
+    }
+
     .footer-copy {
       font-size: 0.67rem;
       font-weight: 300;
       letter-spacing: 0.08em;
       color: var(--stone);
+      padding-bottom: 0.2rem;
     }
 
     /* ANIMATIONS */
@@ -478,13 +503,13 @@
     </div>
   </section>
 
-  <footer>
-  <div class="footer-left">
-    <span class="footer-logo">Affiant</span>
-    <a href="mailto:help@affiant.net" class="footer-email">help@affiant.net</a>
-  </div>
-  <span class="footer-copy">© 2026 Affiant. All rights reserved.</span>
-</footer>
+<footer>
+    <div class="footer-left">
+      <span class="footer-logo">Affiant</span>
+      <a href="mailto:help@affiant.net" class="footer-email">help@affiant.net</a>
+    </div>
+    <span class="footer-copy">© 2026 Affiant. All rights reserved.</span>
+  </footer>
 
   <script>
     window.addEventListener('scroll', () => {
