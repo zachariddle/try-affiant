@@ -16,16 +16,19 @@
     }
 
     html { scroll-behavior: smooth; }
-body { 
-  font-family: 'Inter', sans-serif; 
-  /* Updated Background: Fades from the deep forest green to a muted sage */
-  background: linear-gradient(to bottom, #1a2615 0%, #2c3e24 20%, #3d5238 100%);
-  background-attachment: fixed; /* This keeps the background still while the card scrolls */
-  
-  color: var(--text); 
-  overflow-x: hidden; 
-  font-weight: 500; 
-  -webkit-font-smoothing: antialiased; 
+body {
+  font-family: 'Inter', sans-serif;
+  /* A very pale, botanical off-white */
+  background-color: #f7f9f6; 
+  /* A subtle, wandering gradient for "Airiness" */
+  background: radial-gradient(at 0% 0%, #eef3eb 0%, transparent 50%),
+              radial-gradient(at 100% 0%, #f7f9f6 0%, transparent 50%),
+              #ffffff;
+              
+  color: var(--text);
+  overflow-x: hidden;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
 }
     /* NAV - Transparent and Scrolls Away */
     nav {
