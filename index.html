@@ -169,17 +169,26 @@ body {
   fill: #fff; /* Turns white as button darkens */
 }
     
-    /* Features */
-/* Features - Positioned to reveal text only on scroll */
 .features { 
-  /* 12vh padding ensures the text starts below the 100vh hero cutoff */
-  padding: 12vh 2.5rem 10rem 2.5rem; 
-  background: var(--feature-bg); 
+  /* Shrink width and center it */
+  max-width: 1100px; 
+  width: 90%; 
+  margin: -10vh auto 0 auto; /* Negative margin preserved, centered with 'auto' */
+  
+  /* Vertical Spacing */
+  padding: 12vh 4rem 10rem 4rem; 
+  
+  /* The Tan Color & Glassy feel */
+  background: var(--feature-bg); /* Your tan/cream color */
   position: relative; 
-  margin-top: -10vh; /* Your preferred overlap preserved */
   z-index: 10; 
-  box-shadow: 0 -30px 60px rgba(0,0,0,0.15); 
-  border-radius: 60px 60px 0 0; 
+  
+  /* Rounded on all sides to feel like a floating object */
+  border-radius: 40px; 
+  
+  /* Shadow to give depth against the background */
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2); 
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Ensure the title is crisp and clear for its reveal */
