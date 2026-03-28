@@ -82,7 +82,8 @@
   gap: 12px;
   padding: 1rem 2.5rem;
   
-  /* Option 1: Sunlit Moss Gradient */
+  /* Option 1: Sunlit Moss Base */
+  background: #558b2f; /* Solid fallback */
   background: linear-gradient(180deg, #7cb342 0%, #558b2f 100%);
   
   color: #fff;
@@ -90,10 +91,9 @@
   font-weight: 700;
   letter-spacing: 0.05em;
   text-decoration: none;
-  text-transform: none; /* Keeps it natural and clean */
   
-  /* Rectangular Shape */
-  border-radius: 4px;
+  /* Slightly more round corners (8px) */
+  border-radius: 8px;
   
   /* Glass Styling */
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -103,11 +103,11 @@
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
-  transition: background 0.4s ease, box-shadow 0.4s ease;
+  z-index: 1;
   cursor: pointer;
 }
 
-/* The Glossy Top Shine */
+/* 1. The Glossy Top Shine (Stays static) */
 .btn-glass-earth::before {
   content: '';
   position: absolute;
@@ -115,21 +115,42 @@
   height: 45%;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
   pointer-events: none;
+  z-index: 3;
+}
+
+/* 2. The Hover Darkener (Expands from Top Right) */
+.btn-glass-earth::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -20%;
+  width: 140%;
+  height: 140%;
+  /* Darker moss color */
+  background: radial-gradient(circle at top right, #33691e 0%, rgba(51, 105, 30, 0) 70%);
+  opacity: 0;
+  transform: scale(0.5); /* Starts small */
+  transition: opacity 0.5s ease, transform 0.6s ease; /* Slightly delayed/smooth feel */
+  transition-delay: 0.05s; /* The slight delay you requested */
   z-index: 2;
+  pointer-events: none;
 }
 
-/* Subtle Hover: Just darkens the base slightly, no movement */
-.btn-glass-earth:hover {
-  background: linear-gradient(180deg, #689f38 0%, #436d24 100%);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Subtle "press" feel */
-  transform: none; 
+.btn-glass-earth:hover::after {
+  opacity: 1;
+  transform: scale(1); /* Expands out */
 }
 
-/* Ensure the Apple Icon is consistent */
+/* 3. The Apple Icon (Nudged higher) */
 .btn-glass-earth .mac-icon {
   fill: #fff;
-  transform: translateY(-1.5px); /* Perfectly nudged up */
+  width: 20px;
+  height: 20px;
+  /* Higher nudge for optical balance */
+  transform: translateY(-3.5px); 
   filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
+  position: relative;
+  z-index: 4; /* Keeps icon above the darkening layer */
 }
     
     /* Features */
