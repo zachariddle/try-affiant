@@ -352,11 +352,16 @@
     footer {
       padding: 3rem;
       background: #1a2615; 
-      display: grid;
-      /* Left (1fr), Middle (auto), Right (1fr) */
-      grid-template-columns: 1fr auto 1fr; 
-      align-items: center;
+      display: flex;
+      justify-content: space-between; /* Pushes Logo/Email left, Copyright right */
+      align-items: flex-end; /* Aligns everything to the bottom baseline */
       border-top: 1px solid rgba(255, 255, 255, 0.15); 
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column; /* Stacks Affiant and Email vertically */
+      gap: 0.5rem;
     }
 
     .footer-logo {
@@ -366,7 +371,6 @@
       letter-spacing: 0.05em;
       color: #fff;
       text-transform: none;
-      justify-self: start; /* Sticks to the far left */
     }
 
     .footer-email {
@@ -378,7 +382,6 @@
       opacity: 0.6;
       transition: opacity 0.3s ease;
       letter-spacing: 0.01em;
-      justify-self: center; /* PERFECTLY CENTERED */
     }
 
     .footer-email:hover {
@@ -391,20 +394,17 @@
       font-weight: 300;
       letter-spacing: 0.08em;
       color: var(--stone);
-      justify-self: end; /* Sticks to the far right */
-      text-align: right;
     }
 
-    /* Mobile: Stack them for small screens */
     @media (max-width: 720px) {
       footer {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        flex-direction: column;
+        align-items: center;
         text-align: center;
-        padding: 2rem 1rem;
+        gap: 2rem;
       }
-      .footer-logo, .footer-email, .footer-copy {
-        justify-self: center;
+      .footer-left {
+        align-items: center;
       }
     }
 
