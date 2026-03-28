@@ -8,46 +8,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet"/>
   
   <style>
-    *, *::before, *::after { 
-      box-sizing: border-box; 
-      margin: 0; 
-      padding: 0; 
-    }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --cream: #f5f2eb;
-      --bark: #2c2016;
-      --moss: #3d5230;
-      --sage: #6b8c57;
-      --stone: #8a8070;
-      --gold: #a87d30;
-      --mist: #c5d4b8;
-      --text: #1e1a12;
-      --text-light: #6b6455;
-      --feature-bg: #d4cfbd;
+      --cream: #f5f2eb; --bark: #2c2016; --moss: #3d5230; --sage: #6b8c57;
+      --stone: #8a8070; --gold: #a87d30; --mist: #c5d4b8; --text: #1e1a12;
+      --text-light: #6b6455; --feature-bg: #d4cfbd;
     }
 
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--cream);
-      color: var(--text);
-      overflow-x: hidden;
-      font-weight: 500; 
-      -webkit-font-smoothing: antialiased; 
-    }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; font-weight: 500; -webkit-font-smoothing: antialiased; }
 
     /* NAV */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.4rem 3rem;
-      background: transparent;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 3rem; background: transparent;
       transition: background 0.4s, border-color 0.4s;
     }
     nav.scrolled {
@@ -56,395 +31,94 @@
       border-bottom: 1px solid rgba(44,32,22,0.07);
     }
     
-    .brand-wrapper {
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-      text-decoration: none;
-      color: #fff;
-      transition: color 0.4s;
-    }
+    .brand-wrapper { display: inline-flex; align-items: center; gap: 3px; text-decoration: none; color: #fff; transition: color 0.4s; }
     nav.scrolled .brand-wrapper { color: var(--bark); }
+    .brand-icon { height: 0.90rem; width: auto; display: block; overflow: visible; }
+    .nav-logo-text { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1.2rem; letter-spacing: 0.05em; }
 
-    .brand-icon {
-      height: 0.90rem; 
-      width: auto;    
-      display: block;
-      overflow: visible; 
+    /* Hidden Nav Button Logic */
+    #nav-cta-wrapper {
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      pointer-events: none;
     }
-
-    .nav-logo-text {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 1.2rem;
-      letter-spacing: 0.05em;
-      text-transform: none;
-    }
-
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
-    .nav-links a {
-      font-size: 0.72rem;
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.8);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    nav.scrolled .nav-links a { color: var(--text-light); }
-    .nav-links a:hover { color: #fff; }
-    nav.scrolled .nav-links a:hover { color: var(--bark); }
+    #nav-cta-wrapper.nav-cta-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .btn-nav-small { padding: 0.5rem 1.2rem !important; font-size: 0.7rem !important; border-radius: 8px !important; }
 
     /* HERO */
-    .hero {
-      position: relative;
-      height: 100vh;
-      min-height: 640px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      overflow: hidden;
+    .hero { position: relative; height: 100vh; min-height: 640px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
+    .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; transform: scale(1.04); }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(15, 30, 12, 0.4) 0%, rgba(15, 30, 12, 0) 40%, rgba(212, 207, 189, 0.2) 80%, var(--feature-bg) 100%); z-index: 1; }
+    .hero-content { position: relative; z-index: 2; padding: 0 2rem; max-width: 720px; }
+    .wordmark { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: clamp(3rem, 10vw, 7rem); letter-spacing: -0.02em; color: #fff; line-height: 1; opacity: 0; transform: translateY(18px); animation: fadeUp 1s ease forwards 0.2s; }
+    .tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300; font-size: clamp(1rem, 2.2vw, 1.35rem); color: rgba(255,255,255,0.78); letter-spacing: 0.1em; margin-top: 0.75rem; opacity: 0; animation: fadeUp 1s ease forwards 0.45s; }
+    .hero-rule { width: 48px; height: 1px; background: rgba(255,255,255,0.4); margin: 2rem auto; opacity: 0; animation: fadeUp 1s ease forwards 0.65s; }
+    .hero-sub { font-size: clamp(0.85rem, 1.5vw, 0.95rem); font-weight: 300; color: rgba(255,255,255,0.7); line-height: 1.9; max-width: 460px; margin: 0 auto; opacity: 0; animation: fadeUp 1s ease forwards 0.85s; }
+    .hero-cta { margin-top: 2.5rem; display: flex; justify-content: center; opacity: 0; animation: fadeUp 1s ease forwards 1.05s; }
+
+    /* Button Styling */
+    .btn-cluely {
+      display: inline-flex; align-items: center; gap: 12px; padding: 0.85rem 1.8rem;
+      background: linear-gradient(180deg, #16521c 0%, #092e0d 100%);
+      color: #fff; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.02em; text-decoration: none; border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15); border-top: 1px solid rgba(255, 255, 255, 0.45);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); position: relative; overflow: hidden;
     }
-
-    .hero-photo {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 30%;
-      transform: scale(1.04);
+    .btn-cluely::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 48%; background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 100%); pointer-events: none; z-index: 2; }
+    .btn-cluely::after {
+      content: ''; position: absolute; top: 0; left: -150%; width: 40%; height: 100%;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.12) 50%, rgba(255, 255, 255, 0) 100%);
+      transform: skewX(-25deg); animation: shine-sweep 10s infinite cubic-bezier(0.4, 0, 0.2, 1); z-index: 1;
     }
+    @keyframes shine-sweep { 0% { left: -150%; } 15% { left: 150%; } 100% { left: 150%; } }
+    .btn-cluely:hover { background: linear-gradient(180deg, #1c6623 0%, #0d4013 100%); transform: translateY(-2px) scale(1.02); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); }
 
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(15, 30, 12, 0.4) 0%,      
-        rgba(15, 30, 12, 0) 40%,       
-        rgba(212, 207, 189, 0.2) 80%, 
-        var(--feature-bg) 100%                   
-      );
-      z-index: 1;
-    }
+    .mac-icon { width: 20px; height: 20px; fill: currentColor; transform: translateY(-1.5px); filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2)); shape-rendering: geometricPrecision; position: relative; z-index: 3; }
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      padding: 0 2rem;
-      max-width: 720px;
-    }
-
-    .wordmark {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600; 
-      font-size: clamp(3rem, 10vw, 7rem);
-      letter-spacing: -0.02em;
-      color: #fff;
-      line-height: 1;
-      opacity: 0;
-      transform: translateY(18px);
-      animation: fadeUp 1s ease forwards 0.2s;
-    }
-
-    .tagline {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-weight: 300;
-      font-size: clamp(1rem, 2.2vw, 1.35rem);
-      color: rgba(255,255,255,0.78);
-      letter-spacing: 0.1em;
-      margin-top: 0.75rem;
-      opacity: 0;
-      animation: fadeUp 1s ease forwards 0.45s;
-    }
-
-    .hero-rule {
-      width: 48px;
-      height: 1px;
-      background: rgba(255,255,255,0.4);
-      margin: 2rem auto;
-      opacity: 0;
-      animation: fadeUp 1s ease forwards 0.65s;
-    }
-
-    .hero-sub {
-      font-size: clamp(0.85rem, 1.5vw, 0.95rem);
-      font-weight: 300;
-      color: rgba(255,255,255,0.7);
-      line-height: 1.9;
-      max-width: 460px;
-      margin: 0 auto;
-      opacity: 0;
-      animation: fadeUp 1s ease forwards 0.85s;
-    }
-
-    .hero-cta {
-      margin-top: 2.5rem;
-      display: flex;
-      justify-content: center;
-      opacity: 0;
-      animation: fadeUp 1s ease forwards 1.05s;
-    }
-
-    /* Updated High-Gloss Emerald with Shimmer Animation */
-.btn-cluely {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 0.85rem 1.8rem;
-  
-  /* Brighter Top Gradient for more "pop" */
-  background: linear-gradient(180deg, #16521c 0%, #092e0d 100%);
-  
-  color: #fff;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-decoration: none;
-  border-radius: 12px;
-  
-  /* Sharper Glass Edges */
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-top: 1px solid rgba(255, 255, 255, 0.45);
-  
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.3), 
-    inset 0 1px 2px rgba(255, 255, 255, 0.2);
-  
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  position: relative;
-  overflow: hidden; /* Important for the shimmer */
-}
-
-/* The Glossy Top Overlay */
-.btn-cluely::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 48%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 100%);
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Subtler, less frequent Shimmer Beam */
-.btn-cluely::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 40%; /* Narrower beam for a sharper, cleaner look */
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.12) 50%, /* Reduced opacity from 0.25 to 0.12 */
-    rgba(255, 255, 255, 0) 100%
-  );
-  transform: skewX(-25deg);
-  /* Increased duration to 10 seconds for a calmer feel */
-  animation: shine-sweep 10s infinite cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1;
-}
-
-@keyframes shine-sweep {
-  0% { left: -150%; }
-  15% { left: 150%; } /* Faster sweep at the start (1.5 seconds) */
-  100% { left: 150%; } /* Long 8.5 second pause before the next loop */
-}
-.btn-cluely:hover {
-  background: linear-gradient(180deg, #1c6623 0%, #0d4013 100%);
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-}
-
-.mac-icon {
-  width: 19px; 
-  height: 19px;
-  fill: currentColor;
-  transform: translateY(-2px); 
-  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
-  shape-rendering: geometricPrecision; 
-  position: relative;
-  z-index: 3;
-}
-
-    /* FEATURES */
-    .features { 
-      padding: 10rem 2rem; 
-      background: var(--feature-bg);
-      position: relative; 
-      margin-top: -10vh;
-      z-index: 10;
-      box-shadow: 0 -30px 60px rgba(0,0,0,0.15);
-      border-radius: 60px 60px 0 0;
-    }
-
-    .section-eyebrow {
-      font-size: 0.67rem;
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--moss);
-      text-align: center;
-      margin-bottom: 0.8rem;
-    }
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-size: clamp(1.9rem, 3.5vw, 2.7rem);
-      color: var(--bark);
-      text-align: center;
-      line-height: 1.3;
-      margin-bottom: 4rem;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border: 1px solid rgba(44,32,22,0.1);
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .feat {
-      padding: 3rem 2rem;
-      border-right: 1px solid rgba(44,32,22,0.1);
-      border-bottom: 1px solid rgba(44,32,22,0.1);
-      transition: background 0.3s;
-    }
-    .feat:nth-child(3n) { border-right: none; }
-    .feat:nth-last-child(-n+3) { border-bottom: none; }
+    /* Features and Footer sections remain the same */
+    .features { padding: 10rem 2rem; background: var(--feature-bg); position: relative; margin-top: -10vh; z-index: 10; box-shadow: 0 -30px 60px rgba(0,0,0,0.15); border-radius: 60px 60px 0 0; }
+    .section-eyebrow { font-size: 0.67rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--moss); text-align: center; margin-bottom: 0.8rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(1.9rem, 3.5vw, 2.7rem); color: var(--bark); text-align: center; line-height: 1.3; margin-bottom: 4rem; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid rgba(44,32,22,0.1); max-width: 1100px; margin: 0 auto; }
+    .feat { padding: 3rem 2rem; border-right: 1px solid rgba(44,32,22,0.1); border-bottom: 1px solid rgba(44,32,22,0.1); transition: background 0.3s; }
     .feat:hover { background: rgba(255,255,255,0.2); }
-    
-    .feat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.9rem;
-      color: var(--gold);
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-    .feat-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 400;
-      color: var(--bark);
-      margin-bottom: 0.6rem;
-    }
-    .feat-desc {
-      font-size: 0.82rem;
-      font-weight: 400;
-      color: var(--text-light);
-      line-height: 1.8;
-    }
-
-    /* DOWNLOAD BOTTOM */
-    .download {
-      padding: 8rem 2rem;
-      background: #1a2615;
-      text-align: center;
-    }
-    .download-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      color: #fff;
-      margin-bottom: 1rem;
-    }
-    .download-sub {
-      font-size: 0.78rem;
-      color: var(--mist);
-      letter-spacing: 0.1em;
-      margin-bottom: 2rem;
-    }
-    .btn-download {
-      display: inline-block;
-      padding: 1rem 3rem;
-      background: #fff;
-      color: var(--moss);
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: background 0.3s, transform 0.2s;
-    }
-    .btn-download:hover { background: var(--mist); transform: translateY(-2px); }
-
-    /* FOOTER */
-    footer {
-      padding: 4rem 3rem;
-      background: #1a2615; 
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      border-top: 1px solid rgba(255, 255, 255, 0.1); 
-    }
-    .footer-left {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-    .footer-email {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      color: var(--mist) !important;
-      text-decoration: none !important;
-      opacity: 0.6;
-      transition: opacity 0.3s;
-    }
+    .feat-num { font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; color: var(--gold); font-weight: 600; margin-bottom: 1rem; }
+    .feat-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--bark); margin-bottom: 0.6rem; }
+    .feat-desc { font-size: 0.82rem; font-weight: 400; color: var(--text-light); line-height: 1.8; }
+    .download { padding: 8rem 2rem; background: #1a2615; text-align: center; }
+    .download-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.2rem, 5vw, 3.5rem); color: #fff; margin-bottom: 1rem; }
+    footer { padding: 4rem 3rem; background: #1a2615; display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+    .footer-email { font-size: 0.72rem; color: var(--mist) !important; text-decoration: none !important; opacity: 0.6; transition: opacity 0.3s; }
     .footer-email:hover { opacity: 1; }
-    .footer-copy {
-      font-size: 0.67rem;
-      font-weight: 300;
-      color: var(--stone);
-      letter-spacing: 0.05em;
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    @media (max-width: 900px) {
-      .features-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 720px) {
-      .features-grid { grid-template-columns: 1fr; }
-      nav { padding: 1.2rem 1.5rem; }
-      .nav-links { display: none; }
-      footer { flex-direction: column; align-items: center; text-align: center; gap: 2rem; }
-    }
+    @media (max-width: 720px) { .features-grid { grid-template-columns: 1fr; } nav { padding: 1.2rem 1.5rem; } footer { flex-direction: column; align-items: center; } }
   </style>
 </head>
 
 <body>
-
   <nav id="nav">
     <a class="brand-wrapper" href="#">
       <svg class="brand-icon" viewBox="430 320 160 120" xmlns="http://www.w3.org/2000/svg">
         <g fill="none" stroke="currentColor" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
           <path d="m555.69977 411.39316c-19.29956 29.058014 -57.76779 37.455322 -85.921265 18.75592c-13.519806 -8.979797 -22.804138 -23.13504 -25.810638 -39.351746c-3.0065002 -16.216736 0.51116943 -33.166565 9.779114 -47.120697c19.29953 -29.058014 57.76779 -37.455322 85.921295 -18.75592c28.153442 18.699402 35.330994 57.41443 16.031494 86.47244z"/>
-          <path d="m469.46353 428.82623l70.20474 -103.90552"/>
-          <path d="m535.1805 328.4666l-91.212616 62.33072"/>
-          <path d="m555.026 409.86343l-47.118073 -36.37796"/>
+          <path d="m469.46353 428.82623l70.20474 -103.90552"/><path d="m535.1805 328.4666l-91.212616 62.33072"/><path d="m555.026 409.86343l-47.118073 -36.37796"/>
         </g>
       </svg>
       <span class="nav-logo-text">Affiant</span>
     </a>
-    <ul class="nav-links">
-      <li><a href="#download">Download</a></li>
-    </ul>
+    <div id="nav-cta-wrapper">
+      <a href="#download" class="btn-cluely btn-nav-small">
+        <svg class="mac-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.057 14.782c-.017-2.31 1.888-3.419 1.973-3.473-1.077-1.574-2.748-1.789-3.344-1.813-1.424-.144-2.778.84-3.5.84-.72 0-1.85-.823-3.047-.8-1.572.023-3.021.916-3.83 2.321-1.63 2.836-.417 7.025 1.166 9.31 0.775 1.116 1.694 2.368 2.902 2.324 1.16-.046 1.6-.749 3.004-.749 1.401 0 1.8 0.749 3.024 0.725 1.246-.023 2.036-1.135 2.805-2.253 0.887-1.3 1.252-2.559 1.272-2.623-.028-.01-2.45-.939-2.475-3.811zM14.904 7.509c.64-.775 1.071-1.852.953-2.924-.92.037-2.03.613-2.69 1.388-.592.686-1.11 1.785-.97 2.835.945.073 1.996-.546 2.707-1.299z"/>
+        </svg>
+        Get for Mac
+      </a>
+    </div>
   </nav>
 
   <section class="hero">
@@ -458,8 +132,8 @@
       <div class="hero-cta">
         <a href="#download" class="btn-cluely">
           <svg class="mac-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path d="M17.057 14.782c-.017-2.31 1.888-3.419 1.973-3.473-1.077-1.574-2.748-1.789-3.344-1.813-1.424-.144-2.778.84-3.5.84-.72 0-1.85-.823-3.047-.8-1.572.023-3.021.916-3.83 2.321-1.63 2.836-.417 7.025 1.166 9.31 0.775 1.116 1.694 2.368 2.902 2.324 1.16-.046 1.6-.749 3.004-.749 1.401 0 1.8 0.749 3.024 0.725 1.246-.023 2.036-1.135 2.805-2.253 0.887-1.3 1.252-2.559 1.272-2.623-.028-.01-2.45-.939-2.475-3.811zM14.904 7.509c.64-.775 1.071-1.852.953-2.924-.92.037-2.03.613-2.69 1.388-.592.686-1.11 1.785-.97 2.835.945.073 1.996-.546 2.707-1.299z"/>
-</svg>
+            <path d="M17.057 14.782c-.017-2.31 1.888-3.419 1.973-3.473-1.077-1.574-2.748-1.789-3.344-1.813-1.424-.144-2.778.84-3.5.84-.72 0-1.85-.823-3.047-.8-1.572.023-3.021.916-3.83 2.321-1.63 2.836-.417 7.025 1.166 9.31 0.775 1.116 1.694 2.368 2.902 2.324 1.16-.046 1.6-.749 3.004-.749 1.401 0 1.8 0.749 3.024 0.725 1.246-.023 2.036-1.135 2.805-2.253 0.887-1.3 1.252-2.559 1.272-2.623-.028-.01-2.45-.939-2.475-3.811zM14.904 7.509c.64-.775 1.071-1.852.953-2.924-.92.037-2.03.613-2.69 1.388-.592.686-1.11 1.785-.97 2.835.945.073 1.996-.546 2.707-1.299z"/>
+          </svg>
           Get for Mac
         </a>
       </div>
@@ -471,36 +145,12 @@
       <p class="section-eyebrow reveal">What Affiant Does</p>
       <h2 class="section-title reveal">Document intelligence,<br><em>grounded in evidence</em></h2>
       <div class="features-grid">
-        <div class="feat reveal">
-          <p class="feat-num">01</p>
-          <h3 class="feat-title">Document Parsing</h3>
-          <p class="feat-desc">Upload any document. Affiant reads it deeply and surfaces what matters — facts, figures, and key passages — instantly.</p>
-        </div>
-        <div class="feat reveal">
-          <p class="feat-num">02</p>
-          <h3 class="feat-title">Smart Summaries</h3>
-          <p class="feat-desc">Concise, accurate summaries of dense papers, reports, and articles. Retains nuance. Cuts noise.</p>
-        </div>
-        <div class="feat reveal">
-          <p class="feat-num">03</p>
-          <h3 class="feat-title">Auto Citations</h3>
-          <p class="feat-desc">Every extracted fact arrives with a citation, automatically formatted — so your work is always traceable.</p>
-        </div>
-        <div class="feat reveal">
-          <p class="feat-num">04</p>
-          <h3 class="feat-title">Logic & Reasoning</h3>
-          <p class="feat-desc">Ask Affiant to compare, contrast, or follow an argument across documents. Basic logical inference built in.</p>
-        </div>
-        <div class="feat reveal">
-          <p class="feat-num">05</p>
-          <h3 class="feat-title">Facts & Figures</h3>
-          <p class="feat-desc">Instantly surface statistics, dates, and data points buried in dense text — no manual hunting required.</p>
-        </div>
-        <div class="feat reveal">
-          <p class="feat-num">06</p>
-          <h3 class="feat-title">Carbon Tracker</h3>
-          <p class="feat-desc">A live counter shows the carbon and energy you save each session — research that respects the planet.</p>
-        </div>
+        <div class="feat reveal"><p class="feat-num">01</p><h3 class="feat-title">Document Parsing</h3><p class="feat-desc">Upload any document. Affiant reads it deeply and surfaces what matters.</p></div>
+        <div class="feat reveal"><p class="feat-num">02</p><h3 class="feat-title">Smart Summaries</h3><p class="feat-desc">Concise, accurate summaries of dense papers. Retains nuance. Cuts noise.</p></div>
+        <div class="feat reveal"><p class="feat-num">03</p><h3 class="feat-title">Auto Citations</h3><p class="feat-desc">Every extracted fact arrives with a citation — your work is always traceable.</p></div>
+        <div class="feat reveal"><p class="feat-num">04</p><h3 class="feat-title">Logic & Reasoning</h3><p class="feat-desc">Compare, contrast, or follow an argument across multiple documents.</p></div>
+        <div class="feat reveal"><p class="feat-num">05</p><h3 class="feat-title">Facts & Figures</h3><p class="feat-desc">Instantly surface statistics, dates, and data points buried in dense text.</p></div>
+        <div class="feat reveal"><p class="feat-num">06</p><h3 class="feat-title">Carbon Tracker</h3><p class="feat-desc">A live counter shows the carbon and energy you save each session.</p></div>
       </div>
     </div>
   </section>
@@ -516,14 +166,7 @@
   <footer>
     <div class="footer-left">
       <div class="brand-wrapper">
-        <svg class="brand-icon" viewBox="430 320 160 120" xmlns="http://www.w3.org/2000/svg">
-          <g fill="none" stroke="currentColor" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m555.69977 411.39316c-19.29956 29.058014 -57.76779 37.455322 -85.921265 18.75592c-13.519806 -8.979797 -22.804138 -23.13504 -25.810638 -39.351746c-3.0065002 -16.216736 0.51116943 -33.166565 9.779114 -47.120697c19.29953 -29.058014 57.76779 -37.455322 85.921295 -18.75592c28.153442 18.699402 35.330994 57.41443 16.031494 86.47244z"/>
-            <path d="m469.46353 428.82623l70.20474 -103.90552"/>
-            <path d="m535.1805 328.4666l-91.212616 62.33072"/>
-            <path d="m555.026 409.86343l-47.118073 -36.37796"/>
-          </g>
-        </svg>
+        <svg class="brand-icon" viewBox="430 320 160 120" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"><path d="m555.69977 411.39316c-19.29956 29.058014 -57.76779 37.455322 -85.921265 18.75592c-13.519806 -8.979797 -22.804138 -23.13504 -25.810638 -39.351746c-3.0065002 -16.216736 0.51116943 -33.166565 9.779114 -47.120697c19.29953 -29.058014 57.76779 -37.455322 85.921295 -18.75592c28.153442 18.699402 35.330994 57.41443 16.031494 86.47244z"/><path d="m469.46353 428.82623l70.20474 -103.90552"/><path d="m535.1805 328.4666l-91.212616 62.33072"/><path d="m555.026 409.86343l-47.118073 -36.37796"/></g></svg>
         <span class="nav-logo-text">Affiant</span>
       </div>
       <a href="mailto:help@affiant.net" class="footer-email">help@affiant.net</a>
@@ -535,7 +178,19 @@
     window.addEventListener('scroll', () => {
       const scrolled = window.scrollY;
       const nav = document.getElementById('nav');
+      const navCta = document.getElementById('nav-cta-wrapper');
+      const heroCta = document.querySelector('.hero-cta');
+
+      // Sticky background blur
       nav.classList.toggle('scrolled', scrolled > 60);
+
+      // Top-right button logic: Appear only when hero button is gone
+      const heroBtnBottom = heroCta.offsetTop + heroCta.offsetHeight;
+      if (scrolled > heroBtnBottom) {
+        navCta.classList.add('nav-cta-visible');
+      } else {
+        navCta.classList.remove('nav-cta-visible');
+      }
     });
 
     const reveals = document.querySelectorAll('.reveal');
