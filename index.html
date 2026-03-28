@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='430 320 170 120'><g fill='none' stroke='white' stroke-width='14' stroke-linecap='round' stroke-linejoin='round'><path d='m555.69977 411.39316c-19.29956 29.058014 -57.76779 37.455322 -85.921265 18.75592c-13.519806 -8.979797 -22.804138 -23.13504 -25.810638 -39.351746c-3.0065002 -16.216736 0.51116943 -33.166565 9.779114 -47.120697c19.29953 -29.058014 57.76779 -37.455322 85.921295 -18.75592c28.153442 18.699402 35.330994 57.41443 16.031494 86.47244z'/><path d='m469.46353 428.82623l70.20474 -103.90552'/><path d='m535.1805 328.4666l-91.212616 62.33072'/><path d='m555.026 409.86343l-47.118073 -36.37796'/></g></svg>">  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='430 320 170 120'><g fill='none' stroke='white' stroke-width='18' stroke-linecap='round' stroke-linejoin='round'><path d='m555.69977 411.39316c-19.29956 29.058014 -57.76779 37.455322 -85.921265 18.75592c-13.519806 -8.979797 -22.804138 -23.13504 -25.810638 -39.351746c-3.0065002 -16.216736 0.51116943 -33.166565 9.779114 -47.120697c19.29953 -29.058014 57.76779 -37.455322 85.921295 -18.75592c28.153442 18.699402 35.330994 57.41443 16.031494 86.47244z'/><path d='m469.46353 428.82623l70.20474 -103.90552'/><path d='m535.1805 328.4666l-91.212616 62.33072'/><path d='m555.026 409.86343l-47.118073 -36.37796'/></g></svg>">
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Affiant — Swear to the Truth</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet"/>
@@ -22,7 +23,7 @@
       --mist: #c5d4b8;
       --text: #1e1a12;
       --text-light: #6b6455;
-      --feature-bg: #d4cfbd; /* Your new darker brown */
+      --feature-bg: #d4cfbd;
     }
 
     html { scroll-behavior: smooth; }
@@ -183,7 +184,6 @@
     .hero-cta {
       margin-top: 2.5rem;
       display: flex;
-      gap: 1rem;
       justify-content: center;
       opacity: 0;
       animation: fadeUp 1s ease forwards 1.05s;
@@ -202,26 +202,12 @@
     }
     .btn-primary:hover { background: var(--mist); transform: translateY(-2px); }
 
-    .btn-ghost {
-      padding: 0.8rem 2.2rem;
-      background: transparent;
-      color: #fff;
-      font-size: 0.72rem;
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border: 1px solid rgba(255,255,255,0.5);
-      transition: background 0.3s, border-color 0.3s, transform 0.2s;
-    }
-    .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: #fff; transform: translateY(-2px); }
-
     /* FEATURES */
     .features { 
       padding: 10rem 2rem; 
       background: var(--feature-bg);
       position: relative; 
-      margin-top: -10vh; /* Pulls it up over the hero photo */
+      margin-top: -10vh;
       z-index: 10;
       box-shadow: 0 -30px 60px rgba(0,0,0,0.15);
       border-radius: 60px 60px 0 0;
@@ -364,7 +350,7 @@
     @media (max-width: 720px) {
       .features-grid { grid-template-columns: 1fr; }
       nav { padding: 1.2rem 1.5rem; }
-      .nav-links { display: none; } /* Hide links on mobile for simplicity */
+      .nav-links { display: none; }
       footer { flex-direction: column; align-items: center; text-align: center; gap: 2rem; }
     }
 
@@ -375,17 +361,16 @@
   <nav id="nav">
     <a class="brand-wrapper" href="#">
       <svg class="brand-icon" viewBox="430 320 160 120" xmlns="http://www.w3.org/2000/svg">
-  <g fill="none" stroke="currentColor" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
-    <path d="m555.69977 411.39316c-19.29956 29.058014 -57.76779 37.455322 -85.921265 18.75592c-13.519806 -8.979797 -22.804138 -23.13504 -25.810638 -39.351746c-3.0065002 -16.216736 0.51116943 -33.166565 9.779114 -47.120697c19.29953 -29.058014 57.76779 -37.455322 85.921295 -18.75592c28.153442 18.699402 35.330994 57.41443 16.031494 86.47244z"/>
-    <path d="m469.46353 428.82623l70.20474 -103.90552"/>
-    <path d="m535.1805 328.4666l-91.212616 62.33072"/>
-    <path d="m555.026 409.86343l-47.118073 -36.37796"/>
-  </g>
-</svg>
+        <g fill="none" stroke="currentColor" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m555.69977 411.39316c-19.29956 29.058014 -57.76779 37.455322 -85.921265 18.75592c-13.519806 -8.979797 -22.804138 -23.13504 -25.810638 -39.351746c-3.0065002 -16.216736 0.51116943 -33.166565 9.779114 -47.120697c19.29953 -29.058014 57.76779 -37.455322 85.921295 -18.75592c28.153442 18.699402 35.330994 57.41443 16.031494 86.47244z"/>
+          <path d="m469.46353 428.82623l70.20474 -103.90552"/>
+          <path d="m535.1805 328.4666l-91.212616 62.33072"/>
+          <path d="m555.026 409.86343l-47.118073 -36.37796"/>
+        </g>
+      </svg>
       <span class="nav-logo-text">Affiant</span>
     </a>
     <ul class="nav-links">
-      <li><a href="#features">Features</a></li>
       <li><a href="#download">Download</a></li>
     </ul>
   </nav>
@@ -400,7 +385,6 @@
       <p class="hero-sub">Parse documents, extract facts, and generate summaries — all with automatic citations. Built for researchers. Useful for everyone.</p>
       <div class="hero-cta">
         <a href="#download" class="btn-primary">Download</a>
-        <a href="#features" class="btn-ghost">Learn More</a>
       </div>
     </div>
   </section>
@@ -456,13 +440,13 @@
     <div class="footer-left">
       <div class="brand-wrapper">
         <svg class="brand-icon" viewBox="430 320 160 120" xmlns="http://www.w3.org/2000/svg">
-  <g fill="none" stroke="currentColor" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
-    <path d="m555.69977 411.39316c-19.29956 29.058014 -57.76779 37.455322 -85.921265 18.75592c-13.519806 -8.979797 -22.804138 -23.13504 -25.810638 -39.351746c-3.0065002 -16.216736 0.51116943 -33.166565 9.779114 -47.120697c19.29953 -29.058014 57.76779 -37.455322 85.921295 -18.75592c28.153442 18.699402 35.330994 57.41443 16.031494 86.47244z"/>
-    <path d="m469.46353 428.82623l70.20474 -103.90552"/>
-    <path d="m535.1805 328.4666l-91.212616 62.33072"/>
-    <path d="m555.026 409.86343l-47.118073 -36.37796"/>
-  </g>
-</svg>
+          <g fill="none" stroke="currentColor" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m555.69977 411.39316c-19.29956 29.058014 -57.76779 37.455322 -85.921265 18.75592c-13.519806 -8.979797 -22.804138 -23.13504 -25.810638 -39.351746c-3.0065002 -16.216736 0.51116943 -33.166565 9.779114 -47.120697c19.29953 -29.058014 57.76779 -37.455322 85.921295 -18.75592c28.153442 18.699402 35.330994 57.41443 16.031494 86.47244z"/>
+            <path d="m469.46353 428.82623l70.20474 -103.90552"/>
+            <path d="m535.1805 328.4666l-91.212616 62.33072"/>
+            <path d="m555.026 409.86343l-47.118073 -36.37796"/>
+          </g>
+        </svg>
         <span class="nav-logo-text">Affiant</span>
       </div>
       <a href="mailto:help@affiant.net" class="footer-email">help@affiant.net</a>
