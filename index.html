@@ -24,6 +24,7 @@
       --text: #1e1a12;
       --text-light: #6b6455;
       --feature-bg: #d4cfbd;
+      --cluely-green: #3d5230; /* Primary brand green */
     }
 
     html { scroll-behavior: smooth; }
@@ -189,18 +190,36 @@
       animation: fadeUp 1s ease forwards 1.05s;
     }
 
-    .btn-primary {
-      padding: 0.8rem 2.2rem;
-      background: #fff;
-      color: var(--bark);
-      font-size: 0.72rem;
+    /* CLUELY STYLE BUTTON */
+    .btn-cluely {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0.9rem 1.8rem;
+      background: var(--cluely-green);
+      color: #fff;
+      font-size: 0.78rem;
       font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+      letter-spacing: 0.05em;
       text-decoration: none;
-      transition: background 0.3s, transform 0.2s;
+      border-radius: 100px; /* Pill shape */
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
-    .btn-primary:hover { background: var(--mist); transform: translateY(-2px); }
+    
+    .btn-cluely:hover {
+      background: var(--sage);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    .mac-icon {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
 
     /* FEATURES */
     .features { 
@@ -270,7 +289,7 @@
       line-height: 1.8;
     }
 
-    /* DOWNLOAD */
+    /* DOWNLOAD SECTION BOTTOM */
     .download {
       padding: 8rem 2rem;
       background: #1a2615;
@@ -384,7 +403,12 @@
       <div class="hero-rule"></div>
       <p class="hero-sub">Parse documents, extract facts, and generate summaries — all with automatic citations. Built for researchers. Useful for everyone.</p>
       <div class="hero-cta">
-        <a href="#download" class="btn-primary">Download</a>
+        <a href="#download" class="btn-cluely">
+          <svg class="mac-icon" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
+            <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 33-17.9 64.4-17.9 31 0 39.2 17.9 65.4 17.4 48.3-.7 84-78.4 105.4-111.4l-11.8-7c-21.4-13.3-36.2-34.9-36.3-52.2zM277.6 92.2c16.1-20.2 26.9-48.2 23.9-76.2-23.9 1-52.9 15.9-70.1 35.9-15.4 17.8-28.9 46.2-25.3 73.5 26.6 2 54.1-12.9 71.5-33.2z"/>
+          </svg>
+          Get for Mac
+        </a>
       </div>
     </div>
   </section>
