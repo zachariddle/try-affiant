@@ -186,26 +186,30 @@
   </footer>
 
   <script>
-    window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY;
-      const floatingCta = document.getElementById('floating-cta-container');
-      const heroBtn = document.getElementById('hero-main-btn');
+  window.addEventListener('scroll', () => {
+    const floatingCta = document.getElementById('floating-cta-container');
+    const heroBtn = document.getElementById('hero-main-btn');
 
-      // Calculate when to show the floating button
-      const heroBtnBottom = heroBtn.offsetTop + heroBtn.offsetHeight;
-      
-      if (scrolled > heroBtnBottom) {
-        floatingCta.classList.add('visible');
-      } else {
-        floatingCta.classList.remove('visible');
-      }
+    // getBoundingClientRect().top tells us exactly where the button is 
+    // relative to the top of the screen.
+    const heroBtnPosition = heroBtn.getBoundingClientRect();
+
+    // If the top of the button is less than 0, it has scrolled off-screen.
+    if (heroBtnPosition.top < 0) {
+      floatingCta.classList.add('visible');
+    } else {
+      floatingCta.classList.remove('visible');
+    }
+  });
+
+  // Keep your IntersectionObserver for the fade-in effects
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { 
+      if (e.isIntersecting) { e.target.classList.add('visible'); } 
     });
-
-    const reveals = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => io.observe(el));
-  </script>
+  }, { threshold: 0.1 });
+  reveals.forEach(el => io.observe(el));
+</script>
 </body>
 </html>
