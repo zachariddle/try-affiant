@@ -480,10 +480,13 @@
   </footer>
 
   <script>
-    const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-    });
+  const scrolled = window.scrollY;
+  const photo = document.querySelector('.hero-photo');
+  photo.style.transform = `scale(1.04) translateY(${scrolled * 0.4}px)`;
+  const nav = document.getElementById('nav');
+  nav.classList.toggle('scrolled', scrolled > 60);
+});
     const reveals = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
