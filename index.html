@@ -22,6 +22,7 @@
       --mist: #c5d4b8;
       --text: #1e1a12;
       --text-light: #6b6455;
+      --feature-bg: #d4cfbd; /* Your new darker brown */
     }
 
     html { scroll-behavior: smooth; }
@@ -52,17 +53,32 @@
       backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(44,32,22,0.07);
     }
-    .nav-logo {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  font-size: 1.2rem;
-  letter-spacing: 0.05em;
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.4s;
-}
-    nav.scrolled .nav-logo { color: var(--bark); }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    
+    .brand-wrapper {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+      transition: color 0.4s;
+    }
+    nav.scrolled .brand-wrapper { color: var(--bark); }
+
+    .brand-icon {
+      width: 38px;  /* Increased size since logo is thin */
+      height: 38px;
+      display: block;
+    }
+
+    .nav-logo-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      letter-spacing: 0.05em;
+      text-transform: none;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
     .nav-links a {
       font-size: 0.72rem;
       font-weight: 400;
@@ -89,7 +105,6 @@
       overflow: hidden;
     }
 
-    /* Real photo background */
     .hero-photo {
       position: absolute;
       inset: 0;
@@ -98,25 +113,20 @@
       object-fit: cover;
       object-position: center 30%;
       transform: scale(1.04);
-      animation: subtleZoom 18s ease-in-out infinite alternate;
-    }
-    @keyframes subtleZoom {
-      from { transform: scale(1.04); }
-      to   { transform: scale(1.10); }
     }
 
     .hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(15, 30, 12, 0.4) 0%,      
-    rgba(15, 30, 12, 0) 40%,       
-    rgba(240, 237, 228, 0.2) 80%, 
-    #f0ede4 100%                   
-  );
-  z-index: 1;
-}
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 30, 12, 0.4) 0%,      
+        rgba(15, 30, 12, 0) 40%,       
+        rgba(212, 207, 189, 0.2) 80%, 
+        var(--feature-bg) 100%                   
+      );
+      z-index: 1;
+    }
 
     .hero-content {
       position: relative;
@@ -126,17 +136,15 @@
     }
 
     .wordmark {
-      font-family: 'Space Grotesk', sans-serif !important;
+      font-family: 'Space Grotesk', sans-serif;
       font-weight: 600; 
       font-size: clamp(3rem, 10vw, 7rem);
       letter-spacing: -0.02em;
-      text-transform: none;
       color: #fff;
       line-height: 1;
       opacity: 0;
       transform: translateY(18px);
       animation: fadeUp 1s ease forwards 0.2s;
-      text-shadow: 0 4px 30px rgba(0,0,0,0.3);
     }
 
     .tagline {
@@ -176,7 +184,6 @@
       display: flex;
       gap: 1rem;
       justify-content: center;
-      flex-wrap: wrap;
       opacity: 0;
       animation: fadeUp 1s ease forwards 1.05s;
     }
@@ -185,13 +192,11 @@
       padding: 0.8rem 2.2rem;
       background: #fff;
       color: var(--bark);
-      font-family: 'Inter', sans-serif;
       font-size: 0.72rem;
       font-weight: 500;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       text-decoration: none;
-      display: inline-block;
       transition: background 0.3s, transform 0.2s;
     }
     .btn-primary:hover { background: var(--mist); transform: translateY(-2px); }
@@ -200,55 +205,33 @@
       padding: 0.8rem 2.2rem;
       background: transparent;
       color: #fff;
-      font-family: 'Inter', sans-serif;
       font-size: 0.72rem;
       font-weight: 400;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       text-decoration: none;
       border: 1px solid rgba(255,255,255,0.5);
-      display: inline-block;
       transition: background 0.3s, border-color 0.3s, transform 0.2s;
     }
     .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: #fff; transform: translateY(-2px); }
 
-    @keyframes scrollPulse {
-      0%,100% { opacity:0.3; transform:scaleY(1); }
-      50% { opacity:0.8; transform:scaleY(1.15); }
-    }
-
-    /* Photo credit */
-    .photo-credit {
-      position: absolute;
-      bottom: 1rem;
-      right: 1.2rem;
-      z-index: 3;
-      font-size: 0.6rem;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      color: rgba(255,255,255,0.3);
-    }
-    .photo-credit a { color: inherit; text-decoration: none; }
-    .photo-credit a:hover { color: rgba(255,255,255,0.6); }
-
     /* FEATURES */
     .features { 
       padding: 10rem 2rem; 
-      background: #e1ddd0;
+      background: var(--feature-bg);
       position: relative; 
-      margin-top: -8vh;
+      margin-top: -10vh; /* Pulls it up over the hero photo */
       z-index: 10;
       box-shadow: 0 -30px 60px rgba(0,0,0,0.15);
-      
-      border-radius: 40px 40px 0 0;
-      overflow: hidden;            
+      border-radius: 60px 60px 0 0;
     }
+
     .section-eyebrow {
       font-size: 0.67rem;
       font-weight: 500;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--sage);
+      color: var(--moss);
       text-align: center;
       margin-bottom: 0.8rem;
     }
@@ -266,72 +249,64 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       border: 1px solid rgba(44,32,22,0.1);
+      max-width: 1100px;
+      margin: 0 auto;
     }
     .feat {
-      padding: 2.4rem 1.8rem;
+      padding: 3rem 2rem;
       border-right: 1px solid rgba(44,32,22,0.1);
       border-bottom: 1px solid rgba(44,32,22,0.1);
       transition: background 0.3s;
     }
     .feat:nth-child(3n) { border-right: none; }
     .feat:nth-last-child(-n+3) { border-bottom: none; }
-    .feat:hover { background: rgba(107,140,87,0.05); }
+    .feat:hover { background: rgba(255,255,255,0.2); }
+    
     .feat-num {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       color: var(--gold);
-      letter-spacing: 0.1em;
-      margin-bottom: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
     }
     .feat-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: 400;
       color: var(--bark);
-      margin-bottom: 0.55rem;
+      margin-bottom: 0.6rem;
     }
     .feat-desc {
-      font-size: 0.8rem;
-      font-weight: 300;
+      font-size: 0.82rem;
+      font-weight: 400;
       color: var(--text-light);
-      line-height: 1.85;
+      line-height: 1.8;
     }
 
     /* DOWNLOAD */
     .download {
-  padding: 7rem 2rem;
-  background: #1a2615;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+      padding: 8rem 2rem;
+      background: #1a2615;
+      text-align: center;
     }
-    .download-trees {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 110px;
-      opacity: 0.1;
-    }
-    .download-inner { position: relative; z-index: 2; }
     .download-title {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
-      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
       color: #fff;
-      margin-bottom: 0.7rem;
+      margin-bottom: 1rem;
     }
     .download-sub {
       font-size: 0.78rem;
-      font-weight: 300;
       color: var(--mist);
       letter-spacing: 0.1em;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
     }
     .btn-download {
       display: inline-block;
-      padding: 0.9rem 2.8rem;
+      padding: 1rem 3rem;
       background: #fff;
       color: var(--moss);
-      font-family: 'Inter', sans-serif;
       font-size: 0.72rem;
       font-weight: 500;
       letter-spacing: 0.2em;
@@ -340,72 +315,35 @@
       transition: background 0.3s, transform 0.2s;
     }
     .btn-download:hover { background: var(--mist); transform: translateY(-2px); }
-    .platform-note {
-      margin-top: 1.1rem;
-      font-size: 0.68rem;
-      font-weight: 300;
-      color: rgba(197,212,184,0.55);
-      letter-spacing: 0.1em;
-    }
 
     /* FOOTER */
     footer {
-      padding: 3rem;
+      padding: 4rem 3rem;
       background: #1a2615; 
       display: flex;
-      justify-content: space-between; /* Pushes Logo/Email left, Copyright right */
-      align-items: flex-end; /* Aligns everything to the bottom baseline */
-      border-top: 1px solid rgba(255, 255, 255, 0.15); 
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px solid rgba(255, 255, 255, 0.1); 
     }
-
     .footer-left {
       display: flex;
-      flex-direction: column; /* Stacks Affiant and Email vertically */
-      gap: 0.5rem;
+      flex-direction: column;
+      gap: 0.8rem;
     }
-
-    .footer-logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 1.1rem;
-      letter-spacing: 0.05em;
-      color: #fff;
-      text-transform: none;
-    }
-
     .footer-email {
       font-family: 'Inter', sans-serif;
       font-size: 0.72rem;
-      font-weight: 400;
       color: var(--mist) !important;
       text-decoration: none !important;
       opacity: 0.6;
-      transition: opacity 0.3s ease;
-      letter-spacing: 0.01em;
+      transition: opacity 0.3s;
     }
-
-    .footer-email:hover {
-      opacity: 1;
-      color: #fff !important;
-    }
-
+    .footer-email:hover { opacity: 1; }
     .footer-copy {
       font-size: 0.67rem;
       font-weight: 300;
-      letter-spacing: 0.08em;
       color: var(--stone);
-    }
-
-    @media (max-width: 720px) {
-      footer {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 2rem;
-      }
-      .footer-left {
-        align-items: center;
-      }
+      letter-spacing: 0.05em;
     }
 
     /* ANIMATIONS */
@@ -415,66 +353,44 @@
     .reveal {
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.75s ease, transform 0.75s ease;
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    @media (max-width: 900px) {
+      .features-grid { grid-template-columns: 1fr 1fr; }
+    }
     @media (max-width: 720px) {
       .features-grid { grid-template-columns: 1fr; }
-      .feat { border-right: none; }
-      .feat:nth-last-child(-n+3) { border-bottom: 1px solid rgba(44,32,22,0.1); }
-      .feat:last-child { border-bottom: none; }
       nav { padding: 1.2rem 1.5rem; }
-      .nav-links { gap: 1.5rem; }
+      .nav-links { display: none; } /* Hide links on mobile for simplicity */
+      footer { flex-direction: column; align-items: center; text-align: center; gap: 2rem; }
     }
-
-/* Container for Logo + Text */
-.brand-wrapper {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px; /* Space between SVG and Text */
-  text-decoration: none;
-}
-
-/* Controls the size of your SVG icon */
-.brand-icon {
-  width: 24px;  /* Adjust as needed */
-  height: 24px;
-  fill: currentColor; /* Important: This makes the SVG match the text color automatically */
-}
-    
   </style>
 </head>
 <body>
 
   <nav id="nav">
-  <a class="nav-logo brand-wrapper" href="#">
-    <svg class="brand-icon" viewBox="430 320 140 120" xmlns="http://www.w3.org/2000/svg">
-  <g fill="none" stroke="currentColor" stroke-width="8">
-    <path d="m555.69977 411.39316c-19.29956 29.058014 -57.76779 37.455322 -85.921265 18.75592c-13.519806 -8.979797 -22.804138 -23.13504 -25.810638 -39.351746c-3.0065002 -16.216736 0.51116943 -33.166565 9.779114 -47.120697c19.29953 -29.058014 57.76779 -37.455322 85.921295 -18.75592c28.153442 18.699402 35.330994 57.41443 16.031494 86.47244z"/>
-    <path d="m469.46353 428.82623l70.20474 -103.90552"/>
-    <path d="m535.1805 328.4666l-91.212616 62.33072"/>
-    <path d="m555.026 409.86343l-47.118073 -36.37796"/>
-  </g>
-</svg>
-    <span>Affiant</span>
-  </a>
-</nav>
+    <a class="brand-wrapper" href="#">
+      <svg class="brand-icon" viewBox="430 320 140 120" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m555.69977 411.39316c-19.29956 29.058014 -57.76779 37.455322 -85.921265 18.75592c-13.519806 -8.979797 -22.804138 -23.13504 -25.810638 -39.351746c-3.0065002 -16.216736 0.51116943 -33.166565 9.779114 -47.120697c19.29953 -29.058014 57.76779 -37.455322 85.921295 -18.75592c28.153442 18.699402 35.330994 57.41443 16.031494 86.47244z"/>
+          <path d="m469.46353 428.82623l70.20474 -103.90552"/>
+          <path d="m535.1805 328.4666l-91.212616 62.33072"/>
+          <path d="m555.026 409.86343l-47.118073 -36.37796"/>
+        </g>
+      </svg>
+      <span class="nav-logo-text">Affiant</span>
+    </a>
+    <ul class="nav-links">
       <li><a href="#features">Features</a></li>
       <li><a href="#download">Download</a></li>
     </ul>
   </nav>
 
   <section class="hero">
-    <!-- Real forest photo -->
-    <img
-      class="hero-photo"
-      src="forest.jpg"
-      alt="Misty forest background"
-    />
-
+    <img class="hero-photo" src="forest.jpg" alt="Misty forest"/>
     <div class="hero-overlay"></div>
-
     <div class="hero-content">
       <h1 class="wordmark">Affiant</h1>
       <p class="tagline">Swear to the truth.</p>
@@ -485,10 +401,6 @@
         <a href="#features" class="btn-ghost">Learn More</a>
       </div>
     </div>
-
-    <p class="photo-credit">
-      Photo by <a href="https://unsplash.com/@marinajune" target="_blank">Marita Kavelashvili</a> / Unsplash
-    </p>
   </section>
 
   <section class="features" id="features">
@@ -531,43 +443,41 @@
   </section>
 
   <section class="download" id="download">
-  
     <div class="download-inner">
       <h2 class="download-title reveal">Ready to begin?</h2>
-      <p class="download-sub reveal"> macOS Apple Silicon &nbsp;·&nbsp; Version 1.1.0</p>
+      <p class="download-sub reveal">macOS Apple Silicon &nbsp;·&nbsp; Version 1.1.0</p>
       <a href="#" class="btn-download reveal">Download Affiant</a>
-      <p class="platform-note reveal">Requires macOS 12 or later &nbsp;·&nbsp; Apple Silicon (M1 and later)</p>
     </div>
   </section>
 
-<footer>
+  <footer>
     <div class="footer-left">
-<div class="footer-logo brand-wrapper">
-  <svg class="brand-icon" viewBox="430 320 140 120" xmlns="http://www.w3.org/2000/svg">
-  <g fill="none" stroke="currentColor" stroke-width="8">
-    <path d="m555.69977 411.39316c-19.29956 29.058014 -57.76779 37.455322 -85.921265 18.75592c-13.519806 -8.979797 -22.804138 -23.13504 -25.810638 -39.351746c-3.0065002 -16.216736 0.51116943 -33.166565 9.779114 -47.120697c19.29953 -29.058014 57.76779 -37.455322 85.921295 -18.75592c28.153442 18.699402 35.330994 57.41443 16.031494 86.47244z"/>
-    <path d="m469.46353 428.82623l70.20474 -103.90552"/>
-    <path d="m535.1805 328.4666l-91.212616 62.33072"/>
-    <path d="m555.026 409.86343l-47.118073 -36.37796"/>
-  </g>
-</svg>
-  <span>Affiant</span>
-</div>      <a href="mailto:help@affiant.net" class="footer-email">help@affiant.net</a>
+      <div class="brand-wrapper">
+        <svg class="brand-icon" viewBox="430 320 140 120" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m555.69977 411.39316c-19.29956 29.058014 -57.76779 37.455322 -85.921265 18.75592c-13.519806 -8.979797 -22.804138 -23.13504 -25.810638 -39.351746c-3.0065002 -16.216736 0.51116943 -33.166565 9.779114 -47.120697c19.29953 -29.058014 57.76779 -37.455322 85.921295 -18.75592c28.153442 18.699402 35.330994 57.41443 16.031494 86.47244z"/>
+            <path d="m469.46353 428.82623l70.20474 -103.90552"/>
+            <path d="m535.1805 328.4666l-91.212616 62.33072"/>
+            <path d="m555.026 409.86343l-47.118073 -36.37796"/>
+          </g>
+        </svg>
+        <span class="nav-logo-text">Affiant</span>
+      </div>
+      <a href="mailto:help@affiant.net" class="footer-email">help@affiant.net</a>
     </div>
     <span class="footer-copy">© 2026 Affiant. All rights reserved.</span>
   </footer>
 
   <script>
     window.addEventListener('scroll', () => {
-  const scrolled = window.scrollY;
-  const photo = document.querySelector('.hero-photo');
-  photo.style.transform = `scale(1.04) translateY(${scrolled * 0.4}px)`;
-  const nav = document.getElementById('nav');
-  nav.classList.toggle('scrolled', scrolled > 60);
-});
+      const scrolled = window.scrollY;
+      const nav = document.getElementById('nav');
+      nav.classList.toggle('scrolled', scrolled > 60);
+    });
+
     const reveals = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
     }, { threshold: 0.1 });
     reveals.forEach(el => io.observe(el));
   </script>
