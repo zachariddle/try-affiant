@@ -101,15 +101,18 @@
     }
 
     .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background: 
-        radial-gradient(circle at 50% 110%, #f7f9f6 0%, rgba(247, 249, 246, 0.8) 40%, transparent 80%),
-        linear-gradient(to bottom, transparent 50%, rgba(247, 249, 246, 0.4) 70%, #f7f9f6 100%);
-      pointer-events: none;
-    }
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  /* Changing 50% to 75% makes the top 3/4 of the hero clear.
+     Changing 40% to 20% in the radial gradient pulls the "floor fog" lower.
+  */
+  background: 
+    radial-gradient(circle at 50% 110%, #f7f9f6 0%, rgba(247, 249, 246, 0.8) 20%, transparent 60%),
+    linear-gradient(to bottom, transparent 75%, rgba(247, 249, 246, 0.4) 85%, #f7f9f6 100%);
+  pointer-events: none;
+}
 
     .hero-photo {
       position: absolute;
