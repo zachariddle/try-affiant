@@ -53,9 +53,35 @@ body {
     #floating-cta-container.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
     /* HERO */
-    .hero { position: relative; height: 100vh; min-height: 640px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
-    .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; transform: scale(1.04); }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(15, 30, 12, 0.4) 0%, rgba(15, 30, 12, 0) 40%, rgba(212, 207, 189, 0.2) 80%, var(--feature-bg) 100%); z-index: 1; }
+.hero { 
+  position: relative; 
+  height: 100vh; 
+  min-height: 640px; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; 
+  overflow: hidden; 
+  /* This ensures the hero itself is transparent so the body gradient shows through on the sides */
+  background: transparent; 
+}
+
+.hero-photo { 
+  position: absolute; 
+  inset: 0; 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  object-position: center 30%; 
+  z-index: -1;
+
+  /* The "Fade" Effect: Fades the image into the background color at the bottom */
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  
+  /* Removed transform: scale to keep it grounded, but kept it clean */
+}
     .hero-content { position: relative; z-index: 2; padding: 0 2rem; max-width: 720px; }
     .wordmark { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: clamp(3rem, 10vw, 7rem); letter-spacing: -0.02em; color: #fff; line-height: 1; opacity: 0; transform: translateY(18px); animation: fadeUp 1s ease forwards 0.2s; }
     .tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300; font-size: clamp(1rem, 2.2vw, 1.35rem); color: rgba(255,255,255,0.78); letter-spacing: 0.1em; margin-top: 0.75rem; opacity: 0; animation: fadeUp 1s ease forwards 0.45s; }
