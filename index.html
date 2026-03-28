@@ -75,50 +75,50 @@
 
     .mac-icon { width: 20px; height: 20px; fill: currentColor; transform: translateY(-3px); filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2)); shape-rendering: geometricPrecision; position: relative; z-index: 3; }
 
-/* Sunlit Moss - Earthy Glass Bottom Button */
+/* Frost Glass - White Bottom Button */
 .btn-glass-earth {
   display: inline-flex;
   align-items: center;
   gap: 12px;
   padding: 1rem 2.5rem;
   
-  /* Option 1: Sunlit Moss Base */
-  background: #558b2f; /* Solid fallback */
-  background: linear-gradient(180deg, #7cb342 0%, #558b2f 100%);
+  /* Frost White Base */
+  background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 100%);
   
-  color: #fff;
+  /* Black Text for Contrast */
+  color: #000;
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-decoration: none;
   
-  /* Slightly more round corners (8px) */
+  /* 8px Rounded Corners */
   border-radius: 8px;
   
-  /* Glass Styling */
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  /* White Glass Styling */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), inset 0 1px 0px rgba(255, 255, 255, 0.8);
   
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
   z-index: 1;
   cursor: pointer;
+  transition: color 0.4s ease;
 }
 
-/* 1. The Glossy Top Shine (Stays static) */
+/* 1. The Glossy Shine (Subtle on white) */
 .btn-glass-earth::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 45%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+  height: 40%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
   pointer-events: none;
   z-index: 3;
 }
 
-/* 2. The Hover Darkener (Expands from Top Right) */
+/* 2. Expanding Dark Hover (Top Right) */
 .btn-glass-earth::after {
   content: '';
   position: absolute;
@@ -126,31 +126,38 @@
   right: -20%;
   width: 140%;
   height: 140%;
-  /* Darker moss color */
-  background: radial-gradient(circle at top right, #33691e 0%, rgba(51, 105, 30, 0) 70%);
+  /* Dark grey "ink" expand */
+  background: radial-gradient(circle at top right, #333333 0%, rgba(0, 0, 0, 0) 75%);
   opacity: 0;
-  transform: scale(0.5); /* Starts small */
-  transition: opacity 0.5s ease, transform 0.6s ease; /* Slightly delayed/smooth feel */
-  transition-delay: 0.05s; /* The slight delay you requested */
+  transform: scale(0.5);
+  transition: opacity 0.5s ease, transform 0.6s ease;
+  transition-delay: 0.05s;
   z-index: 2;
-  pointer-events: none;
+}
+
+/* Change text to white when the dark expansion covers it */
+.btn-glass-earth:hover {
+  color: #fff;
 }
 
 .btn-glass-earth:hover::after {
   opacity: 1;
-  transform: scale(1); /* Expands out */
+  transform: scale(1);
 }
 
-/* 3. The Apple Icon (Nudged higher) */
+/* 3. The Apple Icon (Black, nudged high) */
 .btn-glass-earth .mac-icon {
-  fill: #fff;
+  fill: #000; /* Starts black */
   width: 20px;
   height: 20px;
-  /* Higher nudge for optical balance */
-  transform: translateY(-3.5px); 
-  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
+  transform: translateY(-4px); /* Pushed higher as requested */
   position: relative;
-  z-index: 4; /* Keeps icon above the darkening layer */
+  z-index: 4;
+  transition: fill 0.4s ease;
+}
+
+.btn-glass-earth:hover .mac-icon {
+  fill: #fff; /* Turns white as button darkens */
 }
     
     /* Features */
