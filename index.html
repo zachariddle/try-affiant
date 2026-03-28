@@ -353,7 +353,7 @@
       padding: 3rem;
       background: #1a2615; 
       display: grid;
-      /* Creates three equal columns: Left, Center, Right */
+      /* Left (1fr), Middle (auto), Right (1fr) */
       grid-template-columns: 1fr auto 1fr; 
       align-items: center;
       border-top: 1px solid rgba(255, 255, 255, 0.15); 
@@ -366,7 +366,7 @@
       letter-spacing: 0.05em;
       color: #fff;
       text-transform: none;
-      justify-self: start; /* Sticks to the left */
+      justify-self: start; /* Sticks to the far left */
     }
 
     .footer-email {
@@ -391,15 +391,17 @@
       font-weight: 300;
       letter-spacing: 0.08em;
       color: var(--stone);
-      justify-self: end; /* Sticks to the right */
+      justify-self: end; /* Sticks to the far right */
+      text-align: right;
     }
 
-    /* Mobile Fix: Stack them on small screens */
+    /* Mobile: Stack them for small screens */
     @media (max-width: 720px) {
       footer {
         grid-template-columns: 1fr;
         gap: 1.5rem;
         text-align: center;
+        padding: 2rem 1rem;
       }
       .footer-logo, .footer-email, .footer-copy {
         justify-self: center;
