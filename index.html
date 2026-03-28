@@ -192,7 +192,11 @@
 
     /* Animations */
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal { 
+  opacity: 0; 
+  transform: translateY(10px); 
+  transition: opacity 0.5s ease, transform 0.5s ease; 
+}
     .reveal.visible { opacity: 1; transform: translateY(0); }
     @media (max-width: 720px) { .features-grid { grid-template-columns: 1fr; } nav { padding: 1.2rem 1.5rem; } footer { flex-direction: column; align-items: center; text-align: center; gap: 3rem; } }
   </style>
