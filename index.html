@@ -299,18 +299,18 @@
     .features {
   max-width: 1040px;
   width: 85%;
-  margin: -10vh auto 0 auto;
-  padding: 12vh 4rem 4rem 4rem;
+  /* First value (Top): Pulls it up into the hero */
+  /* Third value (Bottom): Sets the 4rem gap below the card */
+  margin: -10vh auto 4rem auto; 
   
-  /* Background changed to Charcoal */
+  /* Reduced bottom padding inside the card to 4rem for a cleaner look */
+  padding: 12vh 4rem 4rem 4rem; 
+  
   background: #1c1c1c; 
   position: relative;
   z-index: 10;
   border-radius: 40px;
-  
-  /* Shadow updated to be softer and darker for the charcoal card */
   box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
-  /* Border updated to a subtle highlight on the dark edge */
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
