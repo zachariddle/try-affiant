@@ -42,26 +42,6 @@
   position: relative;
   min-height: 100vh;
 }
-
-/* The Mist Layer */
-/* The Inky Splotch Layer */
-body::before {
-  content: "";
-  position: fixed;
-  inset: -50px;
-  z-index: -1;
-  background: 
-    radial-gradient(at 12% 18%, #1c1c1c 0%, rgba(28, 28, 28, 0.4) 5%, transparent 18%),
-    radial-gradient(at 88% 22%, #1c1c1c 0%, rgba(28, 28, 28, 0.3) 4%, transparent 12%),
-    radial-gradient(at 8% 75%, #1c1c1c 0%, rgba(28, 28, 28, 0.4) 6%, transparent 20%),
-    radial-gradient(at 92% 82%, #1c1c1c 0%, rgba(28, 28, 28, 0.3) 5%, transparent 15%),
-    radial-gradient(at 50% 98%, #1c1c1c 0%, transparent 15%),
-    radial-gradient(at 3% 48%, #1c1c1c 0%, transparent 12%);
-  
-  /* Reduced blur from 40px to 25px to keep the splotches "defined" */
-  filter: blur(25px);
-  pointer-events: none;
-}
     
     nav {
       position: absolute;
