@@ -48,6 +48,23 @@
     #ffffff;
   background-attachment: fixed;
 }
+
+/* The Mist Layer */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: 
+    radial-gradient(at 15% 25%, rgba(26, 38, 21, 0.15) 0%, transparent 40%),
+    radial-gradient(at 85% 45%, rgba(26, 38, 21, 0.2) 0%, transparent 50%),
+    radial-gradient(at 30% 75%, rgba(26, 38, 21, 0.12) 0%, transparent 45%),
+    radial-gradient(at 70% 85%, rgba(26, 38, 21, 0.18) 0%, transparent 40%),
+    radial-gradient(at 0% 0%, #eef3eb 0%, transparent 50%),
+    radial-gradient(at 100% 0%, #f7f9f6 0%, transparent 50%);
+  pointer-events: none;
+}
+    
     nav {
       position: absolute;
       top: 0; left: 0; right: 0; z-index: 100;
