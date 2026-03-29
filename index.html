@@ -53,16 +53,16 @@
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
+  inset: -100px;
   z-index: -1;
   background: 
-    radial-gradient(at 10% 20%, rgba(26, 38, 21, 0.12) 0%, transparent 20%),
-    radial-gradient(at 90% 15%, rgba(26, 38, 21, 0.1) 0%, transparent 25%),
-    radial-gradient(at 50% 50%, rgba(26, 38, 21, 0.08) 0%, transparent 15%),
-    radial-gradient(at 20% 80%, rgba(26, 38, 21, 0.14) 0%, transparent 20%),
-    radial-gradient(at 80% 85%, rgba(26, 38, 21, 0.12) 0%, transparent 25%),
-    radial-gradient(at 5% 55%, rgba(26, 38, 21, 0.09) 0%, transparent 18%),
-    radial-gradient(at 95% 65%, rgba(26, 38, 21, 0.11) 0%, transparent 22%);
+    radial-gradient(at 15% 15%, rgba(28, 28, 28, 0.2) 0%, rgba(28, 28, 28, 0.05) 8%, transparent 20%),
+    radial-gradient(at 85% 25%, rgba(28, 28, 28, 0.25) 0%, rgba(28, 28, 28, 0.1) 5%, transparent 15%),
+    radial-gradient(at 10% 80%, rgba(28, 28, 28, 0.15) 0%, rgba(28, 28, 28, 0.05) 10%, transparent 25%),
+    radial-gradient(at 90% 85%, rgba(28, 28, 28, 0.3) 0%, rgba(28, 28, 28, 0.1) 5%, transparent 18%),
+    radial-gradient(at 50% 95%, rgba(28, 28, 28, 0.2) 0%, transparent 20%),
+    radial-gradient(at 5% 45%, rgba(28, 28, 28, 0.2) 0%, transparent 15%);
+  filter: blur(40px);
   pointer-events: none;
 }
     
