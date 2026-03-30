@@ -280,14 +280,10 @@
   border-color: #000000; 
 }
 
-    .btn-glass-earth > * {
+.btn-glass-earth > * {
   position: relative; 
   z-index: 10; 
-}
-
-    .btn-glass-earth > * {
-  position: relative;
-  z-index: 5; 
+  pointer-events: none; /* Ensures the text doesn't interfere with clicks */
 }
 
     .btn-glass-earth:hover::after {
