@@ -252,17 +252,38 @@
   transition: all 0.4s ease;
 }
 
-/* Ensure the background fade is identical in timing */
+/* 1. THE PERMANENT SHINE (Top Half) */
+.btn-glass-earth::before {
+  content: '';
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  right: 0;
+  height: 48%; /* Adjust this to change how far down the shine goes */
+  background: linear-gradient(
+    to bottom, 
+    rgba(255, 255, 255, 0.4) 0%, 
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 5; /* This must be higher than the ::after black layer */
+}
+
+/* 2. THE BLACK HOVER LAYER */
 .btn-glass-earth::after {
   content: '';
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
   background: #000000;
   opacity: 0;
-  transition: opacity 0.4s ease; /* Same duration and ease */
-  z-index: 2;
+  transition: opacity 0.4s ease;
+  z-index: 2; /* Sits behind the shine and the text */
 }
 
+}
 .btn-glass-earth:hover {
   color: #ffffff !important;
   border-color: #000000;
