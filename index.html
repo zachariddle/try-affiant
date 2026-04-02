@@ -228,82 +228,69 @@
       z-index: 3; 
     }
 
-    /* Frost Glass - White Bottom Button (Untouched per Instructions) */
-    .btn-glass-earth {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 1rem 2.5rem;
-      background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 100%);
-      color: #000;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-decoration: none;
-      border-radius: 8px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-top: 1px solid rgba(255, 255, 255, 1);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), inset 0 1px 0px rgba(255, 255, 255, 0.8);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-      cursor: pointer;
-      transition: color 0.4s ease;
-    }
+    /* Frost Glass - White Bottom Button */
+.btn-glass-earth {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 100%);
+  color: #000;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), inset 0 1px 0px rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
+  /* Sync all transitions here */
+  transition: all 0.4s ease;
+}
 
-    .btn-glass-earth::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 40%;
-      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
-      pointer-events: none;
-      z-index: 3;
-    }
-
-    .btn-glass-earth::after {
+/* Ensure the background fade is identical in timing */
+.btn-glass-earth::after {
   content: '';
   position: absolute;
-  top: 0; 
-  left: 0; 
-  width: 100%; 
-  height: 100%; 
-  background: #000000; 
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: #000000;
   opacity: 0;
-  transform: scale(1); 
-  transition: opacity 0.4s ease; 
+  transition: opacity 0.4s ease; /* Same duration and ease */
   z-index: 2;
 }
-    .btn-glass-earth:hover {
+
+.btn-glass-earth:hover {
   color: #ffffff !important;
-  background: #000000; 
-  border-color: #000000; 
+  border-color: #000000;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
-.btn-glass-earth > * {
-  position: relative; 
-  z-index: 10; 
-  pointer-events: none; /* Ensures the text doesn't interfere with clicks */
+.btn-glass-earth:hover::after {
+  opacity: 1;
 }
 
-    .btn-glass-earth:hover::after {
-      opacity: 1;
-      transform: scale(1);
-    }
+/* Force text and icon to stay above the black background */
+.btn-glass-earth .btn-text, 
+.btn-glass-earth .mac-icon {
+  position: relative;
+  z-index: 10;
+  transition: fill 0.4s ease, color 0.4s ease;
+}
 
-    .btn-glass-earth .mac-icon {
-      fill: #000; 
-      width: 20px;
-      height: 20px;
-      transform: translateY(-4px); 
-      position: relative;
-      z-index: 4;
-      transition: fill 0.4s ease;
-    }
+.btn-glass-earth .mac-icon {
+  fill: #000;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-4px);
+}
 
-    .btn-glass-earth:hover .mac-icon {
-      fill: #fff; 
-    }
+.btn-glass-earth:hover .mac-icon {
+  fill: #fff;
+}
       
     .features {
   max-width: 1040px;
