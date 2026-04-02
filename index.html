@@ -36,14 +36,17 @@
   color: var(--text);
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
+  margin: 0;
   overflow-x: hidden;
-      
-  /* Remove the gradients here to keep the background pure white */
-  background: linear-gradient(to bottom, #ffffff 0%, #1a2615 100%);
-  background-attachment: fixed;
-  background-size: cover; 
   position: relative;
-  min-height: 100vh;
+  
+  /* THE GRADIENT: Moves with the content */
+  background: linear-gradient(to bottom, #ffffff 0%, #1a2615 100%);
+  background-attachment: scroll; /* Forces it to scroll with text */
+  background-repeat: no-repeat;
+  
+  /* Use min-height instead of height to let the body grow with content */
+  min-height: 100vh; 
 }
     
     nav {
