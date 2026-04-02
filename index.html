@@ -40,12 +40,19 @@
   overflow-x: hidden;
   position: relative;
   
-  /* THE GRADIENT: Moves with the content */
-  background: linear-gradient(to bottom, #ffffff 0%, #1a2615 100%);
-  background-attachment: scroll; /* Forces it to scroll with text */
+  /* COLOR STOP FIX: 
+     #ffffff 0% to #ffffff 100vh means the background stays PURE white 
+     for the entire first screen (the Hero). 
+     Then it begins the transition to green.
+  */
+  background: linear-gradient(
+    to bottom, 
+    #ffffff 0%, 
+    #ffffff 100vh, 
+    #1a2615 100%
+  );
+  background-attachment: scroll;
   background-repeat: no-repeat;
-  
-  /* Use min-height instead of height to let the body grow with content */
   min-height: 100vh; 
 }
     
